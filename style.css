@@ -652,3 +652,48 @@ body.sub-page .profile-section, body.sub-page .resume-col, body.sub-page .honors
         margin-bottom: 5px;
     }
 }
+
+/* =========================================
+   🚨 布局修正补丁 (请粘贴到 style.css 最末尾) 🚨
+   ========================================= */
+
+/* --- 1. 电脑端 (PC) 修正 --- */
+@media (min-width: 769px) {
+    
+    /* 修正文字位置：往右移，增加呼吸感 */
+    #active-info {
+        left: 15% !important; /* 强制距离左边 15% */
+        width: auto !important;
+        max-width: 500px !important; /* 限制最大宽度 */
+        
+        /* 确保垂直居中 */
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        bottom: auto !important;
+        height: auto !important;
+        
+        /* 去掉原本可能存在的全屏背景条，改成干净的文字块 */
+        background: none !important; 
+        padding-left: 0 !important;
+    }
+
+    /* 隐藏电脑端的大箭头 (因为已经有底部缩略图了) */
+    .nav-arrows {
+        display: none !important;
+    }
+}
+
+/* --- 2. 手机端 (Mobile) 修正 --- */
+@media (max-width: 768px) {
+    /* 手机端也隐藏左右箭头 (防止遮挡，手机靠滑动切换) */
+    .nav-arrows {
+        display: none !important;
+    }
+    
+    /* 确保手机端文字位置正常 */
+    #active-info {
+        left: 0 !important;
+        padding-left: 25px !important;
+        background: linear-gradient(to bottom, #000 40%, transparent) !important;
+    }
+}
