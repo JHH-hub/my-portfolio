@@ -555,40 +555,100 @@ body.sub-page .profile-section, body.sub-page .resume-col, body.sub-page .honors
     }
 }
 
-/* === 底部缩略图导航条 === */
+/* =========================================
+   新增：底部缩略图导航条 (最终修正版)
+   ========================================= */
+
 #thumb-container {
     position: fixed;
-    bottom: 80px; 
+    /* 位置上移，避开底部的箭头和页码 */
+    bottom: 130px; 
     left: 50%;
     transform: translateX(-50%);
-    z-index: 150;
+    z-index: 150; /* 确保在最上层 */
+    
     width: auto;
     max-width: 90%;
     padding: 10px 15px;
+
+    /* 玻璃拟态背景 (半透明黑 + 模糊) */
     background: rgba(0, 0, 0, 0.4); 
     backdrop-filter: blur(8px);
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    /* 动画过渡 */
     transition: all 0.3s ease;
 
-    /* 🔴 关键修改：必须允许内容溢出，否则小图向上弹起时会被切掉！ */
+    /* 🔴 关键设置：必须设为 visible！
+       否则选中的缩略图向上“弹起”时，会被容器切掉一半 */
     overflow: visible !important; 
 }
 
-/* ... #thumb-track 保持不变 ... */
-/* ... .thumb-item 保持不变 ... */
+#thumb-track {
+    display: flex;
+    gap: 12px; /* 缩略图之间的间距 */
+    justify-content: center;
+    align-items: center; /* 垂直居中 */
+}
 
-/* === 激活状态 (自动同步的核心样式) === */
+.thumb-item {
+    width: 80px;
+    height: 50px;
+    border-radius: 6px;
+    cursor: pointer;
+
+    /* 默认状态：稍微暗一点，带点灰度，半透明 */
+    opacity: 0.5; 
+    filter: grayscale(60%); 
+    
+    /* 弹性动画曲线，让弹起动作更生动 */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    
+    background-size: cover;
+    background-position: center;
+    border: 1px solid transparent;
+    position: relative;
+}
+
+/* 鼠标悬停 (未选中时) */
+.thumb-item:hover {
+    opacity: 0.9;
+    filter: grayscale(0%);
+    transform: translateY(-5px); /* 鼠标放上去微微上浮 */
+}
+
+/* === 激活状态 (当前选中的作品) === */
+/* 这个状态会由 JS 在滚动或点击时自动添加 */
 .thumb-item.active {
     opacity: 1;
-    /* 亮度大幅提升 */
+    /* 变亮 (亮度1.3倍)，恢复彩色 */
     filter: grayscale(0%) brightness(1.3); 
     border: 1px solid #fff;
-    /* 强烈的发光效果 */
+    
+    /* 强烈的白色发光效果 */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); 
     
-    /* 🔴 向上弹起：这里设置的负值越大，弹起越高 */
+    /* 🔴 向上大幅弹出 + 放大 */
     transform: translateY(-20px) scale(1.15); 
     
-    z-index: 100; /* 保证最上层 */
+    /* 保证选中的这张图压在其他图上面 */
+    z-index: 100; 
+}
+
+/* === 手机端隐藏逻辑 === */
+@media (max-width: 768px) {
+    /* 在手机上完全隐藏缩略图栏，避免拥挤 */
+    #thumb-container, .desktop-only {
+        display: none !important;
+    }
+}
+
+/* === 电脑端视觉优化 === */
+@media (min-width: 769px) {
+    /* 既然有了缩略图，原本的小圆点可以变淡一些，不要太抢眼 */
+    .nav-track {
+        opacity: 0.3;
+        margin-bottom: 5px;
+    }
 }
