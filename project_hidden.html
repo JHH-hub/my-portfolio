@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐域穿梭 | WANG JIHUI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="sub-page">
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="assets/images/p1_72spaces.jpg">
+            <source src="assets/video/bg_reel.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">WANG JIHUI</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">首页 Home</a></li>
+            <li><a href="tech_universe.html">技能栈 Tech</a></li>
+            <li><a href="works.html" class="active">作品 Works</a></li>
+            <li><a href="about.html">简历 & 奖项 About</a></li>
+        </ul>
+    </nav>
+
+
+    <main class="detail-container">
+        <div class="detail-header">
+            <h1 class="detail-title">隐域穿梭 · 七彩虹</h1>
+            <p class="detail-meta">Hidden Domain / Product Film / 2024</p>
+        </div>
+
+        <div class="detail-media">
+            <div class="video-container">
+                <iframe 
+                    src="//player.bilibili.com/player.html?isOutside=true&aid=115592333892912&bvid=BV176UHBLE22&cid=34181021986&p=1&high_quality=1&danmaku=0" 
+                    scrolling="no" 
+                    border="0" 
+                    frameborder="no" 
+                    framespacing="0" 
+                    allowfullscreen="true" 
+                    referrerpolicy="no-referrer">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="detail-content">
+            <div class="award-banner">
+                🏆 获七彩虹 AIPC 挑战赛 — 一等奖
+            </div>
+
+            <h3>项目背景 Concept</h3>
+            <p>
+                本项目为七彩虹 (Colorful) 品牌打造的 AI 视觉广告短片。以“现实与虚拟的穿越”为叙事线索，呈现产品在未来语境下的科技感与想象力。
+            </p>
+
+            <h3>视觉叙事 Visual Narrative</h3>
+            <p>通过对“眼睛”这一视觉符号的特写，暗示虚拟与现实的连接通道。分镜设计涵盖了赛博城市、未来办公空间以及核心产品展示。</p>
+            
+            <div class="process-grid-container" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="process-card">
+                    <div class="process-img-box" style="aspect-ratio: 16/9;">
+                        <img src="assets/images/p2_hidden_eye.jpg" alt="Eye Close-up">
+                    </div>
+                    <h4>核心视觉符号</h4>
+                    <p>眼睛作为连接虚拟与现实的通道。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box" style="aspect-ratio: 16/9;">
+                        <img src="assets/images/p2_hidden_storyboard.jpg" alt="Storyboard Grid">
+                    </div>
+                    <h4>分镜设计</h4>
+                    <p>赛博城市与未来办公空间的多场景切换。</p>
+                </div>
+            </div>
+
+            <h3>LoRA 模型训练流程 AI Workflow</h3>
+            <p style="margin-bottom:30px;">
+                为了保证角色一致性和画风统一，我们基于 Stable Diffusion 训练了专属的 LoRA 模型。
+            </p>
+
+            <div class="process-grid-container" style="grid-template-columns: 1fr 1fr;">
+                
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p2_process_1.jpg" alt="Dataset">
+                    </div>
+                    <h4>01. 语料整理 Dataset</h4>
+                    <p>构建基础训练集，统一图像清晰度与分辨率 (768x1024)。</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p2_process_2.jpg" alt="Tagging">
+                    </div>
+                    <h4>02. 标签清洗 Tagging</h4>
+                    <p>使用自动标注工具生成标签并人工精筛，强化发型与服饰特征。</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p2_process_3.jpg" alt="Feature">
+                    </div>
+                    <h4>03. 角色反推 Feature</h4>
+                    <p>拆解角色特征：粉紫渐变双马尾、机能黑上衣、能量装置。</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p2_process_4.jpg" alt="Feature">
+                    </div>
+                    <h4>04. 模型训练 Training</h4>
+                    <p>采用轻量参数进行初训，随后以初版 LoRA 生成图扩充数据集进行二轮训练。</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer><p>© 2025 WANG JIHUI</p></footer>
+</body>
+</html>

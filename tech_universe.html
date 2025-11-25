@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技能宇宙 | WANG JIHUI</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three-spritetext@1.8.2/dist/three-spritetext.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1.73.1/dist/3d-force-graph.min.js"></script>
+    
+    <style>
+        /* 覆盖全局背景，设为透明，让视频显示出来 */
+        html, body { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; 
+            background-color: transparent; /* 关键修改 */
+        }
+        
+        #3d-graph { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: 0; 
+        }
+
+        /* UI 层 */
+        .overlay-ui {
+            position: absolute; top: 120px; left: 60px; z-index: 10; pointer-events: none;
+        }
+        .overlay-title {
+            font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 800;
+            margin-bottom: 10px; text-shadow: 0 0 20px rgba(59, 130, 246, 0.8); color: white;
+        }
+        .overlay-desc {
+            font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(255,255,255,0.7);
+            max-width: 400px; line-height: 1.6;
+        }
+        .instruction {
+            margin-top: 20px; font-size: 0.8rem; color: #3b82f6; border: 1px solid #3b82f6;
+            padding: 5px 10px; display: inline-block; border-radius: 20px; background: rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+
+<body class="sub-page">
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="assets/images/p1_72spaces.jpg">
+            <source src="assets/video/bg_reel.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">WANG JIHUI</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">首页 Home</a></li>
+            <li><a href="tech_universe.html" class="active">技能栈 Tech</a></li>
+            <li><a href="works.html">作品 Works</a></li>
+            <li><a href="about.html">简历 & 奖项 About</a></li>
+        </ul>
+    </nav>
+
+    <div class="overlay-ui">
+        <h1 class="overlay-title">SKILL<br>UNIVERSE</h1>
+        <p class="overlay-desc">
+            我的数字技能星系。节点代表核心技术，颜色代表不同领域。<br>
+            <span style="color:#38bdf8">● 3D视觉</span> 
+            <span style="color:#a855f7">● AIGC</span> 
+            <span style="color:#f472b6">● 品牌设计</span> 
+            <span style="color:#4ade80">● 交互技术</span>
+        </p>
+        <div class="instruction"><i class="ri-mouse-line"></i> 拖拽旋转 · 滚轮缩放 · 点击聚焦</div>
+    </div>
+
+    <div id="3d-graph"></div>
+
+    <script>
+        const COLORS = {
+            core: '#ffffff',      // 核心
+            threeD: '#38bdf8',    // 3D (蓝)
+            ai: '#a855f7',        // AI (紫)
+            brand: '#f472b6',     // 设计 (粉)
+            inter: '#4ade80'      // 交互 (绿)
+        };
+
+        const gData = {
+            nodes: [
+                // --- 1. 核心与领域 ---
+                { id: '王继辉\nDIGITAL ARTIST', group: 'core', size: 20 },
+                { id: '3D 视觉\nVisual', group: 'threeD', size: 12 },
+                { id: 'AIGC\nGenerative', group: 'ai', size: 12 },
+                { id: '品牌设计\nBranding', group: 'brand', size: 12 },
+                { id: '交互技术\nInteractive', group: 'inter', size: 12 },
+
+                // --- 2. 3D 组 ---
+                { id: 'Cinema 4D', group: 'threeD', size: 8 },
+                { id: 'Octane', group: 'threeD', size: 6 },
+                { id: 'Blender', group: 'threeD', size: 6 },
+                { id: 'UE5', group: 'threeD', size: 8 },
+                { id: 'X-Particles', group: 'threeD', size: 6 },
+
+                // --- 3. AI 组 ---
+                { id: 'Stable Diffusion', group: 'ai', size: 8 },
+                { id: 'Midjourney', group: 'ai', size: 6 },
+                { id: 'LoRA Training', group: 'ai', size: 6 },
+                { id: 'ComfyUI', group: 'ai', size: 6 },
+                { id: 'Runway', group: 'ai', size: 6 },
+
+                // --- 4. 设计组 ---
+                { id: 'Photoshop', group: 'brand', size: 6 },
+                { id: 'Illustrator', group: 'brand', size: 6 },
+                { id: 'After Effects', group: 'brand', size: 8 },
+                { id: 'Premiere', group: 'brand', size: 6 },
+                { id: 'Web Design', group: 'brand', size: 4 },
+
+                // --- 5. 交互组 ---
+                { id: 'TouchDesigner', group: 'inter', size: 8 },
+                { id: 'Arduino', group: 'inter', size: 5 },
+                { id: 'Processing', group: 'inter', size: 5 }
+            ],
+            links: [
+                // 基础连接
+                { source: '王继辉\nDIGITAL ARTIST', target: '3D 视觉\nVisual' },
+                { source: '王继辉\nDIGITAL ARTIST', target: 'AIGC\nGenerative' },
+                { source: '王继辉\nDIGITAL ARTIST', target: '品牌设计\nBranding' },
+                { source: '王继辉\nDIGITAL ARTIST', target: '交互技术\nInteractive' },
+
+                { source: '3D 视觉\nVisual', target: 'Cinema 4D' },
+                { source: '3D 视觉\nVisual', target: 'Blender' },
+                { source: '3D 视觉\nVisual', target: 'UE5' },
+                { source: 'AIGC\nGenerative', target: 'Stable Diffusion' },
+                { source: 'AIGC\nGenerative', target: 'Midjourney' },
+                { source: '品牌设计\nBranding', target: 'Photoshop' },
+                { source: '品牌设计\nBranding', target: 'After Effects' },
+                { source: '交互技术\nInteractive', target: 'TouchDesigner' },
+
+                // 深度连接
+                { source: 'Cinema 4D', target: 'Octane' },
+                { source: 'Cinema 4D', target: 'X-Particles' },
+                { source: 'Cinema 4D', target: 'UE5' },
+                { source: 'Blender', target: 'UE5' },
+                { source: 'Blender', target: 'Octane' },
+
+                { source: 'Stable Diffusion', target: 'LoRA Training' },
+                { source: 'Stable Diffusion', target: 'ComfyUI' },
+                { source: 'LoRA Training', target: 'ComfyUI' },
+                { source: 'Runway', target: 'Stable Diffusion' },
+
+                { source: 'TouchDesigner', target: 'Arduino' },
+                { source: 'TouchDesigner', target: 'Processing' },
+                { source: 'TouchDesigner', target: 'UE5' },
+                { source: 'Processing', target: 'Arduino' },
+
+                { source: 'After Effects', target: 'Premiere' },
+                { source: 'Illustrator', target: 'After Effects' },
+                { source: 'Photoshop', target: 'Illustrator' },
+                { source: 'Photoshop', target: 'Web Design' },
+
+                // 跨领域
+                { source: 'Cinema 4D', target: 'After Effects' },
+                { source: 'Octane', target: 'After Effects' },
+                { source: 'UE5', target: 'Premiere' },
+                { source: 'Midjourney', target: 'Photoshop' },
+                { source: 'Stable Diffusion', target: 'Photoshop' },
+                { source: 'Runway', target: 'Premiere' },
+                { source: 'Stable Diffusion', target: 'Blender' },
+                { source: 'Midjourney', target: 'Cinema 4D' }
+            ]
+        };
+
+        try {
+            const Graph = ForceGraph3D()
+                (document.getElementById('3d-graph'))
+                .graphData(gData)
+                // 3. 核心修改：背景透明，让视频透出来
+                .backgroundColor('rgba(0,0,0,0)') 
+                .showNavInfo(false)
+                
+                .nodeThreeObject(node => {
+                    const sprite = new SpriteText(node.id);
+                    sprite.color = COLORS[node.group] || '#ffffff';
+                    sprite.textHeight = node.group === 'core' ? 10 : (['threeD','ai','brand','inter'].includes(node.group) ? 7 : 4);
+                    sprite.fontFace = 'Montserrat, "Microsoft YaHei", sans-serif';
+                    sprite.fontWeight = node.group === 'core' ? '800' : 'normal'; // 核心节点加粗
+                    return sprite;
+                })
+                
+                .linkColor(link => {
+                    const sourceNode = gData.nodes.find(n => n.id === link.source.id || n.id === link.source);
+                    return sourceNode ? (COLORS[sourceNode.group] || '#ffffff') : '#ffffff';
+                })
+                .linkWidth(0.2)
+                .linkOpacity(0.4)
+                .linkDirectionalParticles(2)
+                .linkDirectionalParticleWidth(0.8)
+                .linkDirectionalParticleSpeed(0.005)
+                
+                .onNodeClick(node => {
+                    const distance = 40;
+                    const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+                    Graph.cameraPosition(
+                        { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+                        node,
+                        3000
+                    );
+                });
+
+            let angle = 0;
+            setInterval(() => {
+                Graph.cameraPosition({
+                    x: 350 * Math.sin(angle),
+                    z: 350 * Math.cos(angle)
+                });
+                angle += 0.001;
+            }, 15);
+
+        } catch (e) {
+            console.error(e);
+        }
+    </script>
+</body>
+</html>

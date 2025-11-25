@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迁形共忆 | WANG JIHUI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body class="sub-page">
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="assets/images/p1_72spaces.jpg">
+            <source src="assets/video/bg_reel.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">WANG JIHUI</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">首页 Home</a></li>
+            <li><a href="tech_universe.html">技能栈 Tech</a></li>
+            <li><a href="works.html" class="active">作品 Works</a></li>
+            <li><a href="about.html">简历 & 奖项 About</a></li>
+        </ul>
+    </nav>
+
+    <main class="detail-container">
+        <div class="detail-header">
+            <h1 class="detail-title">迁形共忆</h1>
+            <p class="detail-meta">Transfigured Memories / Interactive Installation / 2024</p>
+        </div>
+
+        <div class="detail-media">
+            <div class="video-container">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115603474094934&bvid=BV1eKUkBFEne&cid=34226178886&p=1&high_quality=1&danmaku=0" 
+                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" referrerpolicy="no-referrer">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="detail-content">
+            <h3>项目背景 Concept</h3>
+            <p>
+                《迁形共忆》是一件以广州海丝社区为背景的互动艺术作品。海丝社区作为海上丝绸之路的重要遗存，承载了多元文化交汇的历史意义。
+                <br><br>
+                作品结合<strong>点云扫描、数字建模与交互设计技术</strong>，重构历史建筑，展现中外文化交流的记忆流动。我们利用无人机点云扫描捕捉建筑数据，通过 3D 建模还原社区内寺庙、商贸街区等历史空间。
+            </p>
+            
+            <div style="display: flex; gap: 40px; margin-top: 40px; margin-bottom: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <div style="flex:1;">
+                    <h4 style="color:#fff; margin-bottom:10px;">负责内容 My Role</h4>
+                    <ul style="color:rgba(255,255,255,0.6); line-height:1.8; padding-left:20px;">
+                        <li>模型扫描与修改 (RealityCapture)</li>
+                        <li>概念策划与视频剪辑</li>
+                        <li>交互逻辑设计 (TouchDesigner)</li>
+                    </ul>
+                </div>
+                <div style="flex:1;">
+                    <h4 style="color:#fff; margin-bottom:10px;">技术栈 Tech Stack</h4>
+                    <p style="color:rgba(255,255,255,0.6);">Point Cloud / RealityCapture / TouchDesigner / 3D Mapping</p>
+                </div>
+            </div>
+
+            <h3>重建流程 Reconstruction Process</h3>
+            <p style="margin-bottom: 30px;">从物理世界到数字资产的完整工作流：</p>
+            
+            <div class="process-grid-container">
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_step1.jpg" alt="Data Collection">
+                    </div>
+                    <h4>01. 点云数据采集</h4>
+                    <p>使用轻型无人机和相机设备，对海丝社区内的寺庙、居民楼进行高精度扫描。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_step2.jpg" alt="Cleanup">
+                    </div>
+                    <h4>02. 模型清理与优化</h4>
+                    <p>去除噪点与多余信息，优化数据质量，确保模型的精确性与完整性。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_step3.jpg" alt="Modeling">
+                    </div>
+                    <h4>03. 3D 模型重建</h4>
+                    <p>基于清理后的点云数据，利用建模软件生成高精度三维网格模型。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_step4.jpg" alt="Texturing">
+                    </div>
+                    <h4>04. 纹理处理</h4>
+                    <p>对模型进行纹理贴图和光影优化，还原建筑的历史质感。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_step5.jpg" alt="Output">
+                    </div>
+                    <h4>05. 点云模型输出</h4>
+                    <p>将最终完成的数字模型导出，准备进入实时渲染引擎。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_step6.jpg" alt="TouchDesigner">
+                    </div>
+                    <h4>06. TD 效果制作</h4>
+                    <p>导入 TouchDesigner 互动设计平台，编写粒子特效与交互逻辑。</p>
+                </div>
+            </div>
+
+            <h3>交互逻辑 Interaction Logic</h3>
+            <div class="process-grid-container" style="margin-top: 30px;">
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_logic1.jpg" alt="Sensor">
+                    </div>
+                    <h4>01. 感应与触发</h4>
+                    <p>设置触摸屏或体感设备捕捉观众动作，通过交互机制生成反馈指令。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_logic2.jpg" alt="Morphing">
+                    </div>
+                    <h4>02. 点云形态变幻</h4>
+                    <p>根据互动输入，实时改变数字建筑的点云形态，实现虚拟空间中的动态迁移。</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_trans_logic3.jpg" alt="Narrative">
+                    </div>
+                    <h4>03. 文化记忆触发</h4>
+                    <p>每次互动都会触发不同的文化记忆片段，形成动态叙事。</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer><p>© 2025 WANG JIHUI</p></footer>
+</body>
+</html>

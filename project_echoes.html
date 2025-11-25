@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>忆音修复园 | WANG JIHUI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="sub-page">
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="assets/images/p1_72spaces.jpg">
+            <source src="assets/video/bg_reel.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">WANG JIHUI</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">首页 Home</a></li>
+            <li><a href="tech_universe.html">技能栈 Tech</a></li>
+            <li><a href="works.html" class="active">作品 Works</a></li>
+            <li><a href="about.html">简历 & 奖项 About</a></li>
+        </ul>
+    </nav>
+
+    <main class="detail-container">
+        <div class="detail-header">
+            <h1 class="detail-title">忆音修复园</h1>
+            <p class="detail-meta">Echoes of Memory / Sound Installation / 2024</p>
+        </div>
+
+        <div class="detail-media">
+            <div class="video-container">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115605470581508&bvid=BV1sxUkBjEB2&cid=34237320631&p=1&high_quality=1&danmaku=0" 
+                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" referrerpolicy="no-referrer">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="detail-content">
+            
+            <h3>项目背景 Concept</h3>
+            <p>
+                概念源于深圳儿童乐园的拆除。许多儿时生活、玩乐的地方变得残破不堪，逐渐被遗忘。
+                我们无法用物理手段补全残缺的记忆，因此尝试用<strong>声音</strong>作为情感载体，来修复这些有温度的建筑物。
+            </p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; margin-bottom: 50px;">
+                <div class="process-card" style="background:transparent; border:none; padding:0;">
+                    <h4 style="color:#3b82f6; margin-bottom:10px;">空间再现</h4>
+                    <p style="color:#aaa; font-size:0.9rem;">借助虚拟的空间体量来塑造记忆的真实性与自我的认同感，使抽象概念具象化。</p>
+                </div>
+                <div class="process-card" style="background:transparent; border:none; padding:0;">
+                    <h4 style="color:#3b82f6; margin-bottom:10px;">声音修复</h4>
+                    <p style="color:#aaa; font-size:0.9rem;">收集游乐园的音乐与孩子们的欢笑声，在 Audacity 中处理后作为驱动源。</p>
+                </div>
+            </div>
+
+            <h3>技术实现 Technical Workflow</h3>
+            <p style="margin-bottom: 30px;">从实地扫描到粒子重构的完整流程：</p>
+
+            <div class="process-grid-container" style="grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_echoes_scan.jpg" alt="Scanning">
+                    </div>
+                    <h4>01. 实地扫描与重建</h4>
+                    <p>对游乐设施进行多角度实地拍摄，导入 RealityCapture 生成高精度三维点云模型。</p>
+                </div>
+                
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_echoes_model.jpg" alt="Model">
+                    </div>
+                    <h4>02. 模型优化</h4>
+                    <p>修复扫描破损，优化网格拓扑，为粒子特效做准备。</p>
+                </div>
+                
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_echoes_tech.jpg" alt="TD Logic">
+                    </div>
+                    <h4>03. TD 数据驱动</h4>
+                    <p>在 TouchDesigner 中提取音频数据，通过 OSC 传输坐标与强度信息。</p>
+                </div>
+                
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p1_echoes_render.jpg" alt="Particles">
+                    </div>
+                    <h4>04. 粒子视觉化</h4>
+                    <p>利用 X-particles 模拟“记忆消散与重组”的视觉效果，呈现多层次的深度。</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer><p>© 2025 WANG JIHUI</p></footer>
+</body>
+</html>

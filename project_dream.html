@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超现实数字梦境 | WANG JIHUI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="sub-page">
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="assets/images/p1_72spaces.jpg">
+            <source src="assets/video/bg_reel.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">WANG JIHUI</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">首页 Home</a></li>
+            <li><a href="tech_universe.html">技能栈 Tech</a></li>
+            <li><a href="works.html" class="active">作品 Works</a></li>
+            <li><a href="about.html">简历 & 奖项 About</a></li>
+        </ul>
+    </nav>
+
+    <main class="detail-container">
+        <div class="detail-header">
+            <h1 class="detail-title">超现实数字梦境</h1>
+            <p class="detail-meta">Hyperreal Digital Dreamscape / New Media Art / 2024</p>
+        </div>
+
+        <div class="detail-media">
+            <div class="video-container">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115604564545886&bvid=BV1tkUCBWEPk&cid=34232599352&p=1&high_quality=1&danmaku=0" 
+                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" referrerpolicy="no-referrer">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="detail-content">
+            <div class="award-banner">
+                🏆 获 DS 海峡两岸数字艺术一等奖 & 元宇宙设计创新大赛银奖
+            </div>
+
+            <h3>设计思考 Design Concept</h3>
+            <p>
+                <strong>“在计算机的世界中，粤剧会是怎样的新形态？”</strong>
+                <br><br>
+                作品以《牡丹亭·惊梦》为蓝本，引用戏中二人身处梦境时的音频和唱词。我们将音频通过 TouchDesigner 加入蚕丝的声音模拟合成为背景音乐，将唱词打乱重组，成为构建“茧”生长的数据源。
+                <br><br>
+                这隐喻了信息时代的“信息茧房”——人们被大数据和碎片化信息所包裹，如同剧中人为情所困，作茧自缚。
+            </p>
+            
+            <div style="margin-top: 30px; margin-bottom: 50px;">
+                <img src="assets/images/p2_dream_logic.jpg" style="width:100%; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
+                <p style="font-size:0.8rem; color:#666; text-align:center; margin-top:10px;">从传统戏曲到“信息茧房”的逻辑推演</p>
+            </div>
+
+            <div style="display: flex; gap: 40px; margin-bottom: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <div style="flex:1;">
+                    <h4 style="color:#fff; margin-bottom:10px;">负责内容 My Role</h4>
+                    <ul style="color:rgba(255,255,255,0.6); line-height:1.8; padding-left:20px;">
+                        <li>Blender 交互模型制作</li>
+                        <li>TouchDesigner 音乐数据转换编程</li>
+                        <li>Blender 与 TD 的 OSC 端口连接</li>
+                        <li>项目概念产出与逻辑推演</li>
+                    </ul>
+                </div>
+                <div style="flex:1;">
+                    <h4 style="color:#fff; margin-bottom:10px;">技术栈 Tech Stack</h4>
+                    <p style="color:rgba(255,255,255,0.6);">TouchDesigner / Blender (Eevee) / OSC / Audio Reactive</p>
+                </div>
+            </div>
+
+            <h3>技术实现 Technical Implementation</h3>
+            <p style="margin-bottom: 30px;">通过 OSC 协议实现音频数据对 3D 模型的实时驱动：</p>
+            
+            <div class="process-grid-container" style="grid-template-columns: repeat(3, 1fr);">
+                
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p2_dream_tech1.jpg" alt="TD Audio Analysis">
+                    </div>
+                    <h4>01. 音频数据采集</h4>
+                    <p>将粤剧音频放入 TouchDesigner，选取所需元素并提取频谱数据，作为驱动源。</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p2_dream_tech2.jpg" alt="OSC Connection">
+                    </div>
+                    <h4>02. 基础模型 + TD 控制</h4>
+                    <p>通过 Node OSC 将 TD 获取的数据传递到 Blender，实现数据对模型形态的实时控制与 Eevee 渲染。</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-img-box">
+                        <img src="assets/images/p2_dream_tech3.jpg" alt="Camera Interaction">
+                    </div>
+                    <h4>03. 摄像头交互</h4>
+                    <p>提取摄像头捕捉到的环境色值与参与者动态，实时改变“茧”的颜色与形态，实现虚实共生。</p>
+                </div>
+
+            </div>
+
+            <h3>视觉呈现 Visuals</h3>
+            <div style="margin-top: 20px;">
+                <img src="assets/images/p2_dream_render.jpg" style="width:100%; border-radius:8px;">
+                <p style="font-size:0.8rem; color:#666; text-align:center; margin-top:10px;">生成的数字化“茧”形态</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer><p>© 2025 WANG JIHUI</p></footer>
+</body>
+</html>

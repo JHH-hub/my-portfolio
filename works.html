@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | WANG JIHUI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+
+<body class="sub-page">
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="assets/images/p1_72spaces.jpg">
+            <source src="assets/video/bg_reel.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">WANG JIHUI</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">首页 Home</a></li>
+            <li><a href="tech_universe.html">技能栈 Tech</a></li>
+            <li><a href="works.html" class="active">作品 Works</a></li>
+            <li><a href="about.html">简历 & 奖项 About</a></li>
+        </ul>
+    </nav>
+
+    <div class="filter-container">
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="All">ALL</button>
+            <button class="filter-btn" data-filter="Immersive">IMMERSIVE</button>
+            <button class="filter-btn" data-filter="AI">AI VIDEO</button>
+            <button class="filter-btn" data-filter="Branding">BRANDING</button>
+            <button class="filter-btn" data-filter="Interactive">INTERACTIVE</button>
+        </div>
+    </div>
+
+    <div id="active-info">
+        <div class="info-content">
+            <h2 id="info-title">Loading...</h2>
+            <div class="info-meta">
+                <span id="info-type">--</span>
+                <span class="line"></span>
+                <span id="info-year">--</span>
+            </div>
+            <p id="info-desc">Please wait while projects are loading.</p>
+            <div id="info-cta">SCROLL TO EXPLORE</div>
+        </div>
+    </div>
+
+
+
+    
+    <div id="gallery-stage">
+        <div id="gallery-container"></div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="nav-track"></div>
+        <div class="nav-label">00 / 00</div>
+    </div>
+
+    <script src="works_3d.js"></script>
+</body>
+</html>
