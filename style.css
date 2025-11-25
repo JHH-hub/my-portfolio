@@ -554,3 +554,41 @@ body.sub-page .profile-section, body.sub-page .resume-col, body.sub-page .honors
         background: rgba(0, 0, 0, 0.8); /* 手机端背景深一点，防误触 */
     }
 }
+
+/* === 底部缩略图导航条 === */
+#thumb-container {
+    position: fixed;
+    bottom: 80px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 150;
+    width: auto;
+    max-width: 90%;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+
+    /* 🔴 关键修改：必须允许内容溢出，否则小图向上弹起时会被切掉！ */
+    overflow: visible !important; 
+}
+
+/* ... #thumb-track 保持不变 ... */
+/* ... .thumb-item 保持不变 ... */
+
+/* === 激活状态 (自动同步的核心样式) === */
+.thumb-item.active {
+    opacity: 1;
+    /* 亮度大幅提升 */
+    filter: grayscale(0%) brightness(1.3); 
+    border: 1px solid #fff;
+    /* 强烈的发光效果 */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); 
+    
+    /* 🔴 向上弹起：这里设置的负值越大，弹起越高 */
+    transform: translateY(-20px) scale(1.15); 
+    
+    z-index: 100; /* 保证最上层 */
+}

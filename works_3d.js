@@ -1,4 +1,4 @@
-// works_3d.js - High Performance Event-Driven Version (Fixed & Enhanced)
+// works_3d.js - High Performance Event-Driven Version (包含缩略图联动功能)
 
 const allProjects = [
     { title: "七十二空间", category: "Immersive", year: "2024", desc: "入选北京国际电影节。利用点云与粒子特效重构城市记忆的沉浸式影像作品。", img: "assets/images/p1_72spaces.jpg", link: "project_72spaces.html" },
@@ -20,7 +20,7 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 const navLabel = document.querySelector('.nav-label');
 const navTrack = document.querySelector('.nav-track');
 
-// 左右切换按钮 (新增)
+// 左右切换按钮
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
@@ -30,6 +30,10 @@ const typeEl = document.getElementById('info-type');
 const yearEl = document.getElementById('info-year');
 const descEl = document.getElementById('info-desc');
 const infoContent = document.querySelector('.info-content');
+
+// --- 新增：缩略图相关 DOM ---
+const thumbTrack = document.getElementById('thumb-track'); // 获取缩略图容器
+let thumbCards = []; // 用来存缩略图的 DOM
 
 // --- 状态变量 ---
 let currentProjects = [...allProjects];
@@ -64,7 +68,7 @@ function setupFilters() {
     });
 }
 
-// --- 按钮监听设置 (新增) ---
+// --- 按钮监听设置 ---
 function setupNavButtons() {
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
@@ -85,10 +89,13 @@ function setupNavButtons() {
     }
 }
 
-// --- 渲染画廊 DOM ---
+// --- 渲染画廊 DOM (包含缩略图生成) ---
 function renderGallery() {
     container.innerHTML = '';
     if (navTrack) navTrack.innerHTML = '';
+    
+    // 清空旧的缩略图
+    if (thumbTrack) thumbTrack.innerHTML = ''; 
 
     if (currentProjects.length === 0) {
         container.innerHTML = '<div style="color:white;text-align:center;margin-top:20vh;">No projects found.</div>';
@@ -97,11 +104,12 @@ function renderGallery() {
     }
 
     currentProjects.forEach((proj, index) => {
+        // 1. 创建大图 Card
         const card = document.createElement('div');
         card.className = 'gallery-card';
         card.style.backgroundImage = `url('${proj.img}')`;
         
-        // 点击卡片：如果是当前卡片则跳转，否则切换到该卡片
+        // 点击卡片逻辑
         card.addEventListener('click', () => {
             if (index === activeIndex) window.location.href = proj.link;
             else {
@@ -111,7 +119,7 @@ function renderGallery() {
         });
         container.appendChild(card);
 
-        // 底部小圆点
+        // 2. 创建底部小圆点 (如果还有的话)
         if (navTrack) {
             const dot = document.createElement('div');
             dot.className = 'nav-dot';
@@ -121,15 +129,33 @@ function renderGallery() {
             });
             navTrack.appendChild(dot);
         }
+
+        // 3. 创建缩略图 (新增逻辑)
+        if (thumbTrack) {
+            const thumb = document.createElement('div');
+            thumb.className = 'thumb-item';
+            thumb.style.backgroundImage = `url('${proj.img}')`;
+            
+            // 点击缩略图切换
+            thumb.addEventListener('click', () => {
+                activeIndex = index;
+                updateLayout();
+            });
+            thumbTrack.appendChild(thumb);
+        }
     });
 
     cards = document.querySelectorAll('.gallery-card');
-    updateInfo(0);
-    updateNavDots(0);
-    updateButtonState(); // 初始化按钮状态
+    thumbCards = document.querySelectorAll('.thumb-item'); // 获取所有缩略图元素
+    
+    // 初始化一次状态
+    updateInfo(activeIndex);
+    updateNavDots(activeIndex);
+    updateThumbs(activeIndex); 
+    updateButtonState(); 
 }
 
-// --- 核心：布局与状态更新 ---
+// --- 核心：布局与状态更新 (包含联动逻辑) ---
 function updateLayout() {
     cards.forEach((card, index) => {
         const diff = index - activeIndex;
@@ -165,9 +191,15 @@ function updateLayout() {
         }
     });
 
+    // 更新文字
     updateInfo(activeIndex);
+    // 更新小圆点
     updateNavDots(activeIndex);
-    updateButtonState(); // 更新按钮可用状态
+    // 更新箭头状态
+    updateButtonState(); 
+    
+    // --- 核心新增：更新缩略图状态 ---
+    updateThumbs(activeIndex); 
     
     // 进度条更新
     if (currentProjects.length > 1 && progressBar) {
@@ -200,15 +232,27 @@ function updateNavDots(index) {
     });
 }
 
-// --- 辅助：更新按钮状态 (新增) ---
+// --- 辅助：更新缩略图状态 (新增函数) ---
+function updateThumbs(index) {
+    if (!thumbCards.length) return;
+    thumbCards.forEach((thumb, i) => {
+        if (i === index) {
+            thumb.classList.add('active');
+            // 可选：如果缩略图很多，自动滚动到当前选中的位置
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+            thumb.classList.remove('active');
+        }
+    });
+}
+
+// --- 辅助：更新按钮状态 ---
 function updateButtonState() {
     if (!prevBtn || !nextBtn) return;
     
-    // 如果是第一张，禁用"上一个"
     if (activeIndex === 0) prevBtn.classList.add('disabled');
     else prevBtn.classList.remove('disabled');
 
-    // 如果是最后一张，禁用"下一个"
     if (activeIndex === currentProjects.length - 1) nextBtn.classList.add('disabled');
     else nextBtn.classList.remove('disabled');
 }
@@ -235,7 +279,7 @@ window.addEventListener('wheel', (e) => {
     }
 });
 
-// 2. 手机端触摸滑动 (已修复 Bug)
+// 2. 手机端触摸滑动
 let touchStartX = 0;
 let touchStartY = 0;
 
@@ -251,7 +295,6 @@ window.addEventListener('touchend', (e) => {
     const deltaX = touchStartX - touchEndX;
     const deltaY = touchStartY - touchEndY;
 
-    // 判断逻辑：水平距离 > 垂直距离 且 滑动幅度 > 40px
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
         if (deltaX > 0) {
             // 向左滑 (手指左移) -> 看下一张
