@@ -1,4 +1,4 @@
-// works_3d.js - High Performance Event-Driven Version
+// works_3d.js - High Performance Event-Driven Version (Fixed & Enhanced)
 
 const allProjects = [
     { title: "七十二空间", category: "Immersive", year: "2024", desc: "入选北京国际电影节。利用点云与粒子特效重构城市记忆的沉浸式影像作品。", img: "assets/images/p1_72spaces.jpg", link: "project_72spaces.html" },
@@ -13,11 +13,16 @@ const allProjects = [
     { title: "忆音修复园", category: "Interactive", year: "2024", desc: "声音可视化装置。用数字手段修复人们对废弃游乐园的记忆。", img: "assets/images/p1_echoes.jpg", link: "project_echoes.html" }
 ];
 
+// --- DOM 元素获取 ---
 const container = document.getElementById('gallery-container');
 const progressBar = document.querySelector('.progress-bar');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const navLabel = document.querySelector('.nav-label');
 const navTrack = document.querySelector('.nav-track');
+
+// 左右切换按钮 (新增)
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
 
 // 文本元素
 const titleEl = document.getElementById('info-title');
@@ -26,20 +31,24 @@ const yearEl = document.getElementById('info-year');
 const descEl = document.getElementById('info-desc');
 const infoContent = document.querySelector('.info-content');
 
+// --- 状态变量 ---
 let currentProjects = [...allProjects];
 let activeIndex = 0;
 let cards = [];
 
+// --- 初始化 ---
 function init() {
     if(infoContent) {
         infoContent.style.opacity = '1';
         infoContent.style.transform = 'translateY(0)';
     }
     setupFilters();
+    setupNavButtons(); // 初始化按钮监听
     renderGallery();
     updateLayout(); // 初始化布局
 }
 
+// --- 过滤器设置 ---
 function setupFilters() {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -48,13 +57,35 @@ function setupFilters() {
             const filter = btn.dataset.filter;
             currentProjects = filter === 'All' ? [...allProjects] : allProjects.filter(p => p.category.includes(filter) || p.category === filter);
             
-            activeIndex = 0;
+            activeIndex = 0; // 重置到第一张
             renderGallery();
             updateLayout();
         });
     });
 }
 
+// --- 按钮监听设置 (新增) ---
+function setupNavButtons() {
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (activeIndex > 0) {
+                activeIndex--;
+                updateLayout();
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (activeIndex < currentProjects.length - 1) {
+                activeIndex++;
+                updateLayout();
+            }
+        });
+    }
+}
+
+// --- 渲染画廊 DOM ---
 function renderGallery() {
     container.innerHTML = '';
     if (navTrack) navTrack.innerHTML = '';
@@ -70,6 +101,7 @@ function renderGallery() {
         card.className = 'gallery-card';
         card.style.backgroundImage = `url('${proj.img}')`;
         
+        // 点击卡片：如果是当前卡片则跳转，否则切换到该卡片
         card.addEventListener('click', () => {
             if (index === activeIndex) window.location.href = proj.link;
             else {
@@ -79,6 +111,7 @@ function renderGallery() {
         });
         container.appendChild(card);
 
+        // 底部小圆点
         if (navTrack) {
             const dot = document.createElement('div');
             dot.className = 'nav-dot';
@@ -93,14 +126,15 @@ function renderGallery() {
     cards = document.querySelectorAll('.gallery-card');
     updateInfo(0);
     updateNavDots(0);
+    updateButtonState(); // 初始化按钮状态
 }
 
-// --- 核心：高性能布局更新 (只在操作时运行) ---
+// --- 核心：布局与状态更新 ---
 function updateLayout() {
     cards.forEach((card, index) => {
         const diff = index - activeIndex;
         
-        // 1. 绝对层级：离 activeIndex 越近，层级越高
+        // 1. 绝对层级
         const zIndex = 100 - Math.abs(diff);
         card.style.zIndex = zIndex;
 
@@ -111,22 +145,20 @@ function updateLayout() {
             card.style.opacity = 1;
         
         } else if (diff > 0) {
-            // === Future (右后方阶梯) ===
-            if (diff <= 5) { // 只显示后面5张，更远的隐藏以提升性能
+            // === Future (右后方) ===
+            if (diff <= 5) { // 性能优化：只显示后面5张
                 card.className = 'gallery-card visible';
-                // 算法：每往后一张，向右移 200px，向后退 300px
                 const tx = diff * 150; 
                 const tz = diff * -200;
                 card.style.transform = `translate3d(${tx}px, 0, ${tz}px) scale(1)`;
                 card.style.opacity = 1; 
             } else {
-                card.className = 'gallery-card'; // 移除 visible
+                card.className = 'gallery-card'; 
                 card.style.opacity = 0;
             }
         
         } else {
             // === Past (左方消失) ===
-            // 稍微往左移一点并消失
             card.className = 'gallery-card';
             card.style.transform = `translate3d(-300px, 0, 100px) scale(0.8)`;
             card.style.opacity = 0;
@@ -135,15 +167,16 @@ function updateLayout() {
 
     updateInfo(activeIndex);
     updateNavDots(activeIndex);
+    updateButtonState(); // 更新按钮可用状态
     
-    // 进度条
+    // 进度条更新
     if (currentProjects.length > 1 && progressBar) {
         const progress = (activeIndex / (currentProjects.length - 1)) * 100;
         progressBar.style.height = `${Math.max(0, Math.min(100, progress))}%`;
     }
 }
 
-// 辅助函数
+// --- 辅助：更新文本信息 ---
 function updateInfo(index) {
     if (index === null || !currentProjects[index]) {
         if(titleEl) titleEl.innerText = "";
@@ -157,6 +190,7 @@ function updateInfo(index) {
     if (navLabel) navLabel.innerText = `${(index + 1).toString().padStart(2, '0')} / ${currentProjects.length.toString().padStart(2, '0')}`;
 }
 
+// --- 辅助：更新底部圆点 ---
 function updateNavDots(index) {
     if (!navTrack) return;
     const dots = navTrack.querySelectorAll('.nav-dot');
@@ -166,25 +200,42 @@ function updateNavDots(index) {
     });
 }
 
+// --- 辅助：更新按钮状态 (新增) ---
+function updateButtonState() {
+    if (!prevBtn || !nextBtn) return;
+    
+    // 如果是第一张，禁用"上一个"
+    if (activeIndex === 0) prevBtn.classList.add('disabled');
+    else prevBtn.classList.remove('disabled');
+
+    // 如果是最后一张，禁用"下一个"
+    if (activeIndex === currentProjects.length - 1) nextBtn.classList.add('disabled');
+    else nextBtn.classList.remove('disabled');
+}
+
 // --- 交互监听 ---
 
-// 滚轮防抖
+// 1. 鼠标滚轮
 let lastWheel = 0;
 window.addEventListener('wheel', (e) => {
     const now = Date.now();
-    if (now - lastWheel < 100) return; // 100ms 内只响应一次
+    if (now - lastWheel < 100) return; // 防抖
     lastWheel = now;
 
     if (e.deltaY > 0) {
-        if (activeIndex < currentProjects.length - 1) activeIndex++;
+        if (activeIndex < currentProjects.length - 1) {
+            activeIndex++;
+            updateLayout();
+        }
     } else {
-        if (activeIndex > 0) activeIndex--;
+        if (activeIndex > 0) {
+            activeIndex--;
+            updateLayout();
+        }
     }
-    updateLayout();
 });
 
-
-// --- 手机端触摸滑动逻辑 (Touch Swipe) ---
+// 2. 手机端触摸滑动 (已修复 Bug)
 let touchStartX = 0;
 let touchStartY = 0;
 
@@ -200,21 +251,23 @@ window.addEventListener('touchend', (e) => {
     const deltaX = touchStartX - touchEndX;
     const deltaY = touchStartY - touchEndY;
 
-    // 判断是水平滑动还是垂直滚动
-    // 如果水平距离 > 垂直距离，且水平距离 > 40px，则认为是切换卡片
+    // 判断逻辑：水平距离 > 垂直距离 且 滑动幅度 > 40px
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
         if (deltaX > 0) {
-            // 向左滑 -> 下一张
-            if (targetIndex < currentProjects.length - 1) {
-                targetIndex++;
+            // 向左滑 (手指左移) -> 看下一张
+            if (activeIndex < currentProjects.length - 1) {
+                activeIndex++;
+                updateLayout();
             }
         } else {
-            // 向右滑 -> 上一张
-            if (targetIndex > 0) {
-                targetIndex--;
+            // 向右滑 (手指右移) -> 看上一张
+            if (activeIndex > 0) {
+                activeIndex--;
+                updateLayout();
             }
         }
     }
 }, { passive: false });
 
+// 启动
 init();
