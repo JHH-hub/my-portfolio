@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顽石与诗 | WANG JIHUI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* 基础样式 */
+        .detail-media img,
+        .process-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .process-img-box img[src*="files"] { filter: brightness(0.9); }
+
+        /* --- ✨ 新增：档案库网格样式 ✨ --- */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 电脑端两列 */
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .archive-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .archive-card:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-5px);
+        }
+
+        .archive-images {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            height: 200px; /* 固定高度确保整齐 */
+        }
+        
+        .archive-img-box {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+        .archive-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 保证手写字和石头完整显示，不裁切 */
+        }
+
+        .archive-info h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .archive-info p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+            .archive-grid { grid-template-columns: 1fr; } /* 手机端单列 */
+            .archive-images { height: 160px; }
+        }
+    </style>
+</head>
+<body class="sub-page">
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="assets/images/p1_72spaces.jpg">
+            <source src="assets/video/bg_reel.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">WANG JIHUI</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">首页 Home</a></li>
+            <li><a href="tech_universe.html">技能栈 Tech</a></li>
+            <li><a href="works.html" class="active">作品 Works</a></li>
+            <li><a href="about.html">简历 & 奖项 About</a></li>
+        </ul>
+    </nav>
+
+    <div class="detail-container">
+        <div class="detail-header">
+            <h1 class="detail-title">顽石与诗<br><span style="font-size:1.5rem; opacity:0.6;">Stones & Poems</span></h1>
+            <div class="detail-meta">
+                CATEGORY: AR Installation &nbsp;/&nbsp; YEAR: 2024 &nbsp;/&nbsp; TECH: Photogrammetry, Kivicube
+            </div>
+        </div>
+
+        <div class="detail-media" style="aspect-ratio: 16/9; overflow:hidden; border-radius:12px;">
+            <img src="assets/images/p1_stones_ar_main.jpg" alt="AR Main Visual">
+        </div>
+
+        <div class="detail-content">
+            <div class="award-banner">🏛️ 央美实验艺术系合作项目 | 儿童诗歌计划</div>
+            
+            <h2 style="color:var(--accent); margin-bottom:20px;">项目愿景 Vision</h2>
+            <p>
+                《顽石与诗》是一个关于“看见”与“重构”的增强现实（AR）实验项目。
+                <br><br>
+                在成年人的世界里，石头往往是沉默、冰冷且无生命的物体。但在儿童的眼中，每一块石头都有它的性格。我们试图通过技术手段，将这种肉眼不可见的“想象力”可视化，建立自然物质与人类情感的数字化连接。
+            </p>
+
+            <div class="line" style="margin: 40px 0;"></div>
+
+            <h2 style="color:var(--accent); margin-bottom:20px;">从物理到数字 Workflow</h2>
+            <div class="process-grid-container" style="margin-top: 30px;">
+                <div class="process-card">
+                    <div class="process-img-box" style="aspect-ratio: 4/3;">
+                        <img src="assets/images/p1_stones_raw.jpg" alt="Raw Materials">
+                    </div>
+                    <h4>01. 样本采集</h4>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box" style="aspect-ratio: 4/3;">
+                         <img src="assets/images/p1_stones_files.jpg" alt="File Structure">
+                    </div>
+                    <h4>02. 数字资产构建</h4>
+                </div>
+                <div class="process-card">
+                    <div class="process-img-box" style="aspect-ratio: 4/3;">
+                        <img src="assets/images/p1_stones_ar_crystal.jpg" alt="AR Effect">
+                    </div>
+                    <h4>03. AR 编译</h4>
+                </div>
+            </div>
+
+            <div class="line" style="margin: 40px 0;"></div>
+
+            <h2 style="color:var(--accent); margin-bottom:10px;">档案：想象力数据库</h2>
+            <p style="font-size:0.9rem; color:rgba(255,255,255,0.6); margin-bottom:30px;">
+                我们扫描了7组矿石标本，并记录了孩子们对应的手写诗稿。
+                这是“瞬时的灵感”与“永恒的物质”的直接对话。
+            </p>
+
+            <div class="archive-grid">
+                
+                <div class="archive-card">
+                    <div class="archive-images">
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_stone_1.jpg" alt="Stone 1"></div>
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_poem_1.jpg" alt="Poem 1"></div>
+                    </div>
+                    <div class="archive-info">
+                        <h4>NO.01 如果也没有光</h4>
+                        <p>“如果没有光，我们是不是就消失了？” —— 对应黑色矿石</p>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-images">
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_stone_2.jpg" alt="Stone 2"></div>
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_poem_2.jpg" alt="Poem 2"></div>
+                    </div>
+                    <div class="archive-info">
+                        <h4>NO.02 长大了</h4>
+                        <p>“石头也像我一样，一层一层地长高。” —— 对应层叠晶体</p>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-images">
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_stone_3.jpg" alt="Stone 3"></div>
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_poem_3.jpg" alt="Poem 3"></div>
+                    </div>
+                    <div class="archive-info">
+                        <h4>NO.03 地心</h4>
+                        <p>“谁把宝石变成了岩浆，流淌在火建造的路上。” —— 对应红色矿石</p>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-images">
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_stone_4.jpg" alt="Stone 4"></div>
+                        <div class="archive-img-box"><img src="assets/images/p1_archive_poem_4.jpg" alt="Poem 4"></div>
+                    </div>
+                    <div class="archive-info">
+                        <h4>NO.04 书签</h4>
+                        <p>“夹在大地这本书里的记号。” —— 对应片状岩石</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="line" style="margin: 50px 0;"></div>
+
+            <h2 style="color:var(--accent); margin-bottom:20px;">最终呈现 Presentation</h2>
+            <p>
+                现场观众手持石头，通过手机扫描即可触发体验。
+                不仅能看到漂浮的文字与动态插画，还能听到孩子们稚嫩的朗读声，从视觉与听觉双重维度“解构”这块顽石。
+            </p>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 WANG JIHUI. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

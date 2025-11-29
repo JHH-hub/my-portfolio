@@ -181,8 +181,39 @@ body.scrolled .video-overlay {
 .section-header h2 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; white-space: nowrap; }
 .line { width: 100%; height: 1px; background: rgba(255,255,255,0.1); }
 .carousel-container { position: relative; display: flex; align-items: center; }
-.carousel-track { display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 5px; width: 100%; scrollbar-width: none; }
-.carousel-track::-webkit-scrollbar { display: none; }
+/* --- 优化后的轨道样式 (添加到 style.css) --- */
+
+.carousel-track {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto; /* 允许横向滚动 */
+    padding: 20px 5px; /* 上下留点空隙给阴影 */
+    width: 100%;
+    
+    /* 1. 隐藏默认的丑陋滚动条 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+    
+    /* 2. 增加磁吸效果 (关键优化) */
+    scroll-snap-type: x mandatory; 
+    scroll-behavior: smooth; /* 平滑滚动 */
+}
+
+/* 隐藏 Chrome/Safari 的滚动条 */
+.carousel-track::-webkit-scrollbar { 
+    display: none; 
+}
+
+/* 3. 让每一张卡片都能被吸附 */
+.card {
+    /* ... 原有的样式保持不变 ... */
+    
+    /* 新增这一行： */
+    scroll-snap-align: start; 
+    
+    /* 强制卡片不换行，确保永远是横向排列 */
+    flex-shrink: 0; 
+}
 .nav-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: 0.3s; flex-shrink: 0; }
 .nav-btn:hover { background: white; color: black; }
 
@@ -696,4 +727,60 @@ body.sub-page .profile-section, body.sub-page .resume-col, body.sub-page .honors
         padding-left: 25px !important;
         background: linear-gradient(to bottom, #000 40%, transparent) !important;
     }
+}
+
+/* =========================================
+   🛠️ FINAL OPTIMIZATIONS (追加到文件末尾)
+   ========================================= */
+
+/* 1. 多图并列排版 (来自 Urban Pulse 项目) */
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 40px 0;
+}
+.image-full {
+    margin: 40px 0;
+    width: 100%;
+}
+.caption {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5); /* 统一颜色 */
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+}
+
+/* 2. 移动端适配修正 */
+@media (max-width: 768px) {
+    /* 图片网格变单列 */
+    .image-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* 修复亚森科技页面按钮在手机上太宽的问题 */
+    .live-link-btn {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box; 
+    }
+    
+    /* 修复 Works 页面筛选器在手机上可能换行的问题 */
+    .filter-bar {
+        flex-wrap: nowrap; /* 强制不换行 */
+        overflow-x: auto; /* 允许横滑 */
+    }
+}
+
+/* 3. 修复 Works 页面 3D 卡片层级 */
+/* 确保当前激活的卡片永远在最上面，且鼠标可以点击 */
+.gallery-card.active {
+    pointer-events: auto !important;
+}
+
+/* 非激活卡片在移动端防止误触 */
+.gallery-card:not(.active) {
+    pointer-events: none;
 }

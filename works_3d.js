@@ -1,16 +1,130 @@
 // works_3d.js - High Performance Event-Driven Version (包含缩略图联动功能)
 
+// works_3d.js
+
 const allProjects = [
-    { title: "七十二空间", category: "Immersive", year: "2024", desc: "入选北京国际电影节。利用点云与粒子特效重构城市记忆的沉浸式影像作品。", img: "assets/images/p1_72spaces.jpg", link: "project_72spaces.html" },
-    { title: "柒牌品牌广告", category: "AI", year: "2024", desc: "全球大学生 AI 创意大赛人气奖。利用 Midjourney 与 Runway 打造的超现实品牌叙事短片。", img: "assets/images/p2_qipai.jpg", link: "project_qipai.html" },
-    { title: "迁形共忆", category: "Interactive", year: "2024", desc: "基于 TouchDesigner 的交互装置。采集海丝社区点云数据，通过触碰重构消失的文化空间。", img: "assets/images/p1_transmuted.jpg", link: "project_transmuted.html" },
-    { title: "隐域穿梭", category: "AI", year: "2025", desc: "七彩虹 AIPC 挑战赛一等奖。结合赛博朋克视觉风格的显卡概念广告。", img: "assets/images/p2_hidden.jpg", link: "project_hidden.html" },
-    { title: "光之门", category: "Immersive", year: "2024", desc: "广美毕业季开幕式核心视觉。以粒子光束勾勒建筑轮廓，象征创意的无限延展。", img: "assets/images/p2_gate.jpg", link: "project_gate.html" },
-    { title: "亚森科技", category: "Branding", year: "2023", desc: "全案品牌升级。从 VI 识别系统到企业官网开发，构建现代化的数字化形象。", img: "assets/images/p3_yasen_cover.jpg", link: "project_yasen.html" },
-    { title: "MIRROR", category: "Interactive", year: "2024", desc: "海峡两岸数字艺术二等奖。元宇宙背景下的情感交互虚拟角色。", img: "assets/images/p3_mirror.jpg", link: "project_mirror.html" },
-    { title: "超现实数字梦境", category: "Immersive", year: "2024", desc: "元宇宙设计大赛银奖。将戏曲音频转化为可视化数据流。", img: "assets/images/p2_dream.jpg", link: "project_dream.html" },
-    { title: "三星伴月", category: "Branding", year: "2022", desc: "三星堆文创 IP 设计。古蜀文明符号与现代潮玩美学的结合。", img: "assets/images/p3_stars.jpg", link: "project_stars.html" },
-    { title: "忆音修复园", category: "Interactive", year: "2024", desc: "声音可视化装置。用数字手段修复人们对废弃游乐园的记忆。", img: "assets/images/p1_echoes.jpg", link: "project_echoes.html" }
+    // --- Section 01: 数字空间 × 文化叙事 ---
+    { 
+        title: "七十二空间", 
+        category: "Immersive", 
+        year: "2024", 
+        desc: "入选北京国际电影节。利用点云与粒子特效重构城市记忆的沉浸式影像作品。", 
+        img: "assets/images/p1_72spaces.jpg", 
+        link: "project_72spaces.html" 
+    },
+    { 
+        title: "琵琶一曲世千年", 
+        category: "Immersive", // 3D Mapping 通常归类为沉浸式
+        year: "2023", 
+        desc: "数字文旅 3D Mapping 项目。将古画与光影结合的数字叙事体验。", 
+        img: "assets/images/p1_pipa.jpg", 
+        link: "project_pipa.html" 
+    },
+    { 
+        title: "超现实数字梦境", 
+        category: "Immersive", // 根据主页语境，也可改为 AI，暂保持 Immersive
+        year: "2024", 
+        desc: "元宇宙设计大赛银奖。将戏曲音频转化为可视化数据流。", 
+        img: "assets/images/p2_dream.jpg", 
+        link: "project_dream.html" 
+    },
+
+    // --- Section 02: AI × 动态影像 ---
+    { 
+        title: "柒牌品牌广告", 
+        category: "AI", 
+        year: "2024", 
+        desc: "全球大学生 AI 创意大赛人气奖。利用 Midjourney 与 Runway 打造的超现实品牌叙事短片。", 
+        img: "assets/images/p2_qipai.jpg", 
+        link: "project_qipai.html" 
+    },
+    { 
+        title: "隐域穿梭", 
+        category: "AI", 
+        year: "2025", 
+        desc: "七彩虹 AIPC 挑战赛一等奖。结合赛博朋克视觉风格的显卡概念广告。", 
+        img: "assets/images/p2_hidden.jpg", 
+        link: "project_hidden.html" 
+    },
+    { 
+        title: "光之门", 
+        category: "AI", 
+        year: "2024", 
+        desc: "广美毕业季开幕式核心视觉。以粒子光束勾勒建筑轮廓，象征创意的无限延展。", 
+        img: "assets/images/p2_gate.jpg", 
+        link: "project_gate.html" 
+    },
+
+    // --- Section 03: 视觉设计 × Interactive ---
+
+    { 
+        title: "MIRROR", 
+        category: "Branding", 
+        year: "2024", 
+        desc: "海峡两岸数字艺术二等奖。元宇宙背景下的情感交互虚拟角色。", 
+        img: "assets/images/p3_mirror.jpg", 
+        link: "project_mirror.html" 
+    },
+    { 
+        title: "亚森科技VI", 
+        category: "Branding", 
+        year: "2023", 
+        desc: "全案品牌升级。从 VI 识别系统到企业官网开发，构建现代化的数字化形象。", 
+        img: "assets/images/p3_yasen_cover.jpg", 
+        link: "project_yasen.html" 
+    },
+    { 
+        title: "U米 (U-Mi)", 
+        category: "Branding", 
+        year: "2025", 
+        desc: "元宇宙数据工程师 IP。结合拟物化与科技感，打造兼具工程师气质与温暖性格的智能伙伴。", 
+        img: "assets/images/p3_umi.jpg", 
+        link: "project_umi.html" 
+    },
+    { 
+        title: "三星伴月", 
+        category: "Branding", 
+        year: "2022", 
+        desc: "三星堆文创 IP 设计。古蜀文明符号与现代潮玩美学的结合。", 
+        img: "assets/images/p3_stars.jpg", 
+        link: "project_stars.html" 
+    },
+
+    
+    // --- Section 04: 交互 × 动态影像 ---
+    { 
+        title: "顽石与诗", 
+        category: "Interactive", 
+        year: "2024", 
+        desc: "央美实验艺术系合作项目。扫描自然顽石触发儿童诗歌，通过 AR 技术构建自然与童真的诗意对话。", 
+        img: "assets/images/p1_stones.jpg", 
+        link: "project_stones.html" 
+    },
+    { 
+        title: "迁形共忆", 
+        category: "Interactive", 
+        year: "2024", 
+        desc: "基于 TouchDesigner 的交互装置。采集海丝社区点云数据，通过触碰重构消失的文化空间。", 
+        img: "assets/images/p1_transmuted.jpg", 
+        link: "project_transmuted.html" 
+    },
+    { 
+        title: "忆音修复园", 
+        category: "Interactive", 
+        year: "2024", 
+        desc: "声音可视化装置。用数字手段修复人们对废弃游乐园的记忆。", 
+        img: "assets/images/p1_echoes.jpg", 
+        link: "project_echoes.html" 
+    },
+    { 
+        title: "城市脉动", 
+        category: "Interactive", 
+        year: "2024", 
+        desc: "广州灯光节交互作品。以心形装置响应触碰压力，寓意粤港澳大湾区同频共振的生命律动。", 
+        img: "assets/images/p1_urban.jpg", 
+        link: "project_urban.html" 
+    },
+
 ];
 
 // --- DOM 元素获取 ---
